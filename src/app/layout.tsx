@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Header } from './_components/Header/header'
 import "./globals.css";
 
 const geistSans = localFont({
@@ -20,13 +21,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  auth,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  auth: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <Header />
         {children}
+        {/* ★ ↓: Parallel & Intercepting Routes によるモーダル表示 */}
+        {auth}
+        {modal}
       </body>
     </html>
   );
